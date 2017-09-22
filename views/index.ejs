@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		function logout(){
+			location.href = "/logout";
+		}
+	</script>
+</head>
+<body>
+	<% if(userid){ %>
+		<h2> Hi <%= userid %></h2>
+		<input type="button" value="로그아웃" onclick="logout()">
+	<% } %>
+</body>
+</html>

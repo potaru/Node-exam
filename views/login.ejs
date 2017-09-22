@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function signUp(){
+			location.href = "/signUp"
+		}
+	</script>
+</head>
+<body>
+	<form id="loginform" action="userlogin" method="post">
+		<input type="text" id="id" name="id">
+		<input type="text" id="pwd" name="password">
+		<input type="submit" value="Submit">
+	</form>
+	<input type="button" name="signup" value="회원가입하기" onclick="signUp()">
+</body>
+</html>
