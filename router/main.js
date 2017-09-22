@@ -85,7 +85,26 @@ module.exports = function(app, mysql)
 	})
 
 	app.get('/signUp', function(req, res){
-		
+		res.render('signUp');
+	});
+
+	app.post('/user_signUp', function(req, res){
+
+		var connection = mysql.createConnection({
+			host:'localhost',
+			user:'root',
+			password:'skek1009',
+			port:3306,
+			database:'loginout_db'
+		});
+
+		var signUp_userid = req.body.signUp_userid;
+		var signUp_password = req.body.signUp_password;
+		var signUp_name = req.body.signUp_name;
+
+		connection.connect();
+		connection.query("INSERT INTO User VALUES('"+signUp_userid+"','"+signUp_password+"','"+signUp_name+"')");
+		res.redirect('/login');
 	});
 }
 

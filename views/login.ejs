@@ -3,17 +3,18 @@
 <head>
 	<title></title>
 	<script type="text/javascript">
-		function signUp(){
+		function mv_signUp(){
 			location.href = "/signUp"
 		}
 	</script>
 </head>
 <body>
 	<form id="loginform" action="userlogin" method="post">
-		<input type="text" id="id" name="id">
-		<input type="text" id="pwd" name="password">
+		ID : <input type="text" id="id" name="id"><br>
+		Password : <input type="password" id="pwd" name="password"><Br>
 		<input type="submit" value="Submit">
+		<input type="button" name="signup" value="회원가입하기" onclick="mv_signUp()">
 	</form>
-	<input type="button" name="signup" value="회원가입하기" onclick="signUp()">
+	
 </body>
 </html>
