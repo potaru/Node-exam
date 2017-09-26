@@ -1,17 +1,21 @@
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as session from 'express-session';
+import * as mysql from 'mysql2';
+
 import config from './config/config';
+
+import indexRouter from "./router/main";
+
 declare var __dirname;
+declare var require;
 
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var mysql = require('mysql2');
-
+const app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');
 app.engine('html', require('ejs').renderFile);
 
-var server = app.listen(config.port, function(){
+const server = app.listen(config.port, function(){
 	console.log("Express server has started on port 3000")
 });
 
@@ -31,5 +35,5 @@ app.use(session({
 	saveUninitialized: true
 }));
 
+const router = indexRouter(app, mysql);
 
-var router = require('./router/main')(app, mysql);
