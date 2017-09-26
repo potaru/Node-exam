@@ -5,12 +5,26 @@
 		function logout(){
 			location.href = "/logout";
 		}
+		function mv_write(){
+			location.href='/write'; 
+		}
 	</script>
 </head>
 <body>
 	<% if(userid){ %>
 		<h2> Hi <%= userid %></h2>
 		<input type="button" value="로그아웃" onclick="logout()">
+	<% } %>
+	<input type="button" value="글쓰기" onclick="mv_write()">
+	<% if(posts){  %>
+		<ul>
+			<% for(let post of posts){ %>
+				<li>
+					<div><%= post.title %></div>
+					<small><%= post.content %></small>
+				</li>
+			<% } %>
+		</ul>
 	<% } %>
 </body>
 </html>

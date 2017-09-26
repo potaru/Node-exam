@@ -1,22 +1,27 @@
-import config_db from '../config/config_db';
 import { Router } from 'express';
-import { mysql } from 'mysql2';
 import { Promise } from 'bluebird';
 
 import User from '../models/user';
+import Post from '../models/post';
 
-export default function(app, mysql){
+export default function(app){
     app.get('/',function(req, res){
-        const sess = req.session;
-        
+        const sess = req.session; 
         if(!sess.userid){
             res.redirect('/login')
         }
         else{
-            res.render('index',{
-                userid: sess.userid,
-                password: sess.password
-            })
+            Post.findAll({
+              
+            }).then((posts) =>{
+                res.render('index',{
+                    userid: sess.userid,
+                    password: sess.password,
+                    posts: posts
+                })
+            }).catch((error) => {
+                console.log(error, "error");
+            });
         }
     });
 
@@ -28,7 +33,6 @@ export default function(app, mysql){
         else{
             res.render('login');
         }
-
     });
 
     app.post('/userlogin', function(req, res){
@@ -47,7 +51,6 @@ export default function(app, mysql){
             if(!sess.userid){
                 sess.userid = input_id;
                 sess.password = input_password;
-
                 res.redirect('/');
             }
             else{
@@ -62,7 +65,6 @@ export default function(app, mysql){
 
     app.get('/logout', function(req, res){
         const sess = req.session;
-
         if(sess.userid){
             sess.destroy(function(err){
                 if(err){

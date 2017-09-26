@@ -1,16 +1,22 @@
 "use strict";
 exports.__esModule = true;
 var user_1 = require("../models/user");
-function default_1(app, mysql) {
+var post_1 = require("../models/post");
+function default_1(app) {
     app.get('/', function (req, res) {
         var sess = req.session;
         if (!sess.userid) {
             res.redirect('/login');
         }
         else {
-            res.render('index', {
-                userid: sess.userid,
-                password: sess.password
+            post_1["default"].findAll({}).then(function (posts) {
+                res.render('index', {
+                    userid: sess.userid,
+                    password: sess.password,
+                    posts: posts
+                });
+            })["catch"](function (error) {
+                console.log(error, "error");
             });
         }
     });

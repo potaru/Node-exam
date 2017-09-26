@@ -3,9 +3,9 @@ exports.__esModule = true;
 var express = require("express");
 var bodyParser = require("body-parser");
 var session = require("express-session");
-var mysql = require("mysql2");
 var config_1 = require("./config/config");
 var main_1 = require("./router/main");
+var post_1 = require("./router/post");
 var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -25,4 +25,5 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-var router = main_1["default"](app, mysql);
+var router = main_1["default"](app);
+var router2 = post_1["default"](app);

@@ -1,11 +1,11 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
-import * as mysql from 'mysql2';
 
 import config from './config/config';
 
 import indexRouter from "./router/main";
+import postRouter from "./router/post";
 
 declare var __dirname;
 declare var require;
@@ -35,5 +35,5 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-const router = indexRouter(app, mysql);
-
+const router = indexRouter(app);
+const router2 = postRouter(app);
