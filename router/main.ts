@@ -91,4 +91,3 @@ export default function(app){
         res.redirect('/login');
     });
 }
-
